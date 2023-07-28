@@ -26,14 +26,8 @@ extension Color {
 struct IngredientModel : Hashable{
     enum Category : String, CaseIterable {
         case greens = "Greens"
-        case veggies = "Veggies"
         case protein = "Protein"
-        case fats = "Fats"
         case oil = "Oil"
-        case seedsAndNuts = "Seeds & Nuts"
-        case fruits = "Fruits"
-        case seasoning = "Seasoning"
-        case acid = "Acid"
     }
     
     var name : String
@@ -45,27 +39,15 @@ struct IngredientModel : Hashable{
         switch self.category {
         case .greens:
             return Color.greensColor
-        case .veggies:
-            return Color.veggiesColor
         case .protein:
             return Color.proteinColor
-        case .fats:
-            return Color.fatsColor
         case .oil:
             return Color.oilColor
-        case .seedsAndNuts:
-            return Color.seedsColor
-        case .fruits:
-            return Color.fruitsColor
-        case .seasoning:
-            return Color.seasoningColor
-        case .acid:
-            return Color.acidColor
         }
     }
     var symbolName : String {
         switch self.category {
-        case .acid :
+        case .greens :
             return "volleyball"
         default :
             return "cricket.ball"
@@ -73,7 +55,7 @@ struct IngredientModel : Hashable{
     }
     var symbolNameFilled : String {
         switch self.category {
-        case .acid :
+        case .greens :
             return "volleyball.fill"
         default :
             return "cricket.ball.fill"

@@ -18,22 +18,10 @@ struct CreateIngredientFormView: View {
             switch category {
             case .greens:
                 Color.greensColor.edgesIgnoringSafeArea(.all)
-            case .veggies:
-                Color.veggiesColor.edgesIgnoringSafeArea(.all)
             case .protein:
                 Color.proteinColor.edgesIgnoringSafeArea(.all)
-            case .fats:
-                Color.fatsColor.edgesIgnoringSafeArea(.all)
             case .oil:
                 Color.oilColor.edgesIgnoringSafeArea(.all)
-            case .seedsAndNuts:
-                Color.seedsColor.edgesIgnoringSafeArea(.all)
-            case .fruits:
-                Color.fruitsColor.edgesIgnoringSafeArea(.all)
-            case .seasoning:
-                Color.seasoningColor.edgesIgnoringSafeArea(.all)
-            case .acid:
-                Color.acidColor.edgesIgnoringSafeArea(.all)
             }
             VStack {
                 Text("Create ingredient")
@@ -70,7 +58,7 @@ struct CreateIngredientFormView: View {
 
 struct CreateIngredientFormView_Previews: PreviewProvider {
     static var previews: some View {
-        CreateIngredientFormView(category: .fats)
+        CreateIngredientFormView(category: .greens)
             .environmentObject(IngredientViewModel())
     }
 }
