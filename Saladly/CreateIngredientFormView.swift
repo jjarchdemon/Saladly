@@ -38,6 +38,7 @@ struct CreateIngredientFormView: View {
             VStack {
                 Text("Create ingredient")
                     .font(.title.bold())
+                    .foregroundColor(Color(uiColor: .systemBackground))
                 TextField("Name...", text: $textFieldName)
                     .padding()
                     .frame(maxWidth: .infinity)
@@ -49,7 +50,7 @@ struct CreateIngredientFormView: View {
                     
                     //
                 } label: {
-                    Text("Save")
+                    Text("Create")
                         .font(.title3)
                         .bold()
                         .foregroundColor(Color(uiColor: .systemBackground))
