@@ -8,23 +8,24 @@
 import Foundation
 import SwiftUI
 
+// MARK: - Color Extension
 extension Color {
-   // static let brightGreen = Color(red: 35 / 255, green: 230 / 255, blue: 150 / 255)
-    static let brightGreen = Color(red: 155 / 255, green: 207 / 255, blue: 123 / 255)
-    static let brightBlue = Color(red: 20 / 255, green: 220 / 255, blue: 240 / 255)
-    static let greensColor = Color(red: 185 / 255, green: 206 / 255, blue: 183 / 255)
-    static let veggiesColor = Color(red: 156 / 255, green: 195 / 255, blue: 111 / 255)
-    static let proteinColor = Color(red: 138 / 255, green: 173 / 255, blue: 98 / 255)
-    static let fatsColor = Color(red: 84 / 255, green: 120 / 255, blue: 96 / 255)
-    static let oilColor = Color(red: 156 / 255, green: 195 / 255, blue: 111 / 255)
-    static let seedsColor = Color(red: 138 / 255, green: 173 / 255, blue: 98 / 255)
-    static let fruitsColor = Color(red: 84 / 255, green: 120 / 255, blue: 96 / 255)
-    static let seasoningColor = Color(red: 194 / 255, green: 216 / 255, blue: 170 / 255)
-    static let acidColor = Color(red: 156 / 255, green: 195 / 255, blue: 111 / 255)
+    static let categoryColors: [IngredientModel.Category: Color] = [
+        .greens: Color(red: 185 / 255, green: 206 / 255, blue: 183 / 255),
+        .veggies: Color(red: 156 / 255, green: 195 / 255, blue: 111 / 255),
+        .protein: Color(red: 138 / 255, green: 173 / 255, blue: 98 / 255),
+        .fats: Color(red: 84 / 255, green: 120 / 255, blue: 96 / 255),
+        .oil: Color(red: 156 / 255, green: 195 / 255, blue: 111 / 255),
+        .seedsAndNuts: Color(red: 138 / 255, green: 173 / 255, blue: 98 / 255),
+        .fruits: Color(red: 84 / 255, green: 120 / 255, blue: 96 / 255),
+        .seasoning: Color(red: 194 / 255, green: 216 / 255, blue: 170 / 255),
+        .acid: Color(red: 156 / 255, green: 195 / 255, blue: 111 / 255)
+    ]
 }
-//Model
-struct IngredientModel : Hashable{
-    enum Category : String, CaseIterable {
+
+// MARK: - Ingredient Model
+struct IngredientModel: Hashable {
+    enum Category: String, CaseIterable {
         case greens = "Greens"
         case veggies = "Veggies"
         case protein = "Protein"
@@ -35,49 +36,21 @@ struct IngredientModel : Hashable{
         case seasoning = "Seasoning"
         case acid = "Acid"
     }
-    
-    var name : String
-    var isPrep : Bool = false
-    var isSelected : Bool = false
-    var category : Category
-    
-    var color : Color {
-        switch self.category {
-        case .greens:
-            return Color.greensColor
-        case .veggies:
-            return Color.veggiesColor
-        case .protein:
-            return Color.proteinColor
-        case .fats:
-            return Color.fatsColor
-        case .oil:
-            return Color.oilColor
-        case .seedsAndNuts:
-            return Color.seedsColor
-        case .fruits:
-            return Color.fruitsColor
-        case .seasoning:
-            return Color.seasoningColor
-        case .acid:
-            return Color.acidColor
-        }
+
+    var name: String
+    var isPrep: Bool = false
+    var isSelected: Bool = false
+    var category: Category
+
+    var color: Color {
+        Color.categoryColors[category] ?? .gray
     }
-    var symbolName : String {
-        switch self.category {
-        case .acid :
-            return "volleyball"
-        default :
-            return "cricket.ball"
-        }
+
+    var symbolName: String {
+        category == .acid ? "volleyball" : "cricket.ball"
     }
-    var symbolNameFilled : String {
-        switch self.category {
-        case .acid :
-            return "volleyball.fill"
-        default :
-            return "cricket.ball.fill"
-        }
+
+    var symbolNameFilled: String {
+        "\(symbolName).fill"
     }
-    
 }
