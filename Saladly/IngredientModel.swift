@@ -25,7 +25,7 @@ extension Color {
 
 // MARK: - Ingredient Model
 struct IngredientModel: Hashable {
-    enum Category: String, CaseIterable {
+    enum Category: String, CaseIterable, Hashable {
         case greens = "Greens"
         case veggies = "Veggies"
         case protein = "Protein"
@@ -35,6 +35,10 @@ struct IngredientModel: Hashable {
         case fruits = "Fruits"
         case seasoning = "Seasoning"
         case acid = "Acid"
+        
+        var color: Color { // Computed property for color
+            Color.categoryColors[self] ?? .gray
+        }
     }
 
     var name: String
@@ -42,7 +46,7 @@ struct IngredientModel: Hashable {
     var isSelected: Bool = false
     var category: Category
 
-    var color: Color {
+    var color: Color {  //keep this for now but its redundant
         Color.categoryColors[category] ?? .gray
     }
 

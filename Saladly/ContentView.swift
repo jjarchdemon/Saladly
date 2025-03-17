@@ -22,7 +22,7 @@ struct ContentView: View {
             }
             .tag(0)
             
-            SaladMakerView(vm: _vm)
+            SaladMakerView()
             .tabItem {
                 Image(systemName: "frying.pan.fill")
                 Text("Make")
@@ -36,7 +36,7 @@ struct ContentView: View {
             }
             .tag(2)
             
-        }.accentColor(.brightGreen)
+        }.accentColor(.green)
         
     }
 }

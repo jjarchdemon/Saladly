@@ -51,30 +51,35 @@ class IngredientViewModel: ObservableObject {
         IngredientModel(name: "sherry", category: .acid)
     ]
     
-    @Published var filteredIngredientsArray: [IngredientModel] = []
-    
-    init() {
-        // Initialize the filtered array to match the full list initially.
-        filteredIngredientsArray = ingredientsArray
-    }
-    
-    func filterIngredients(by category: IngredientModel.Category) {
-        filteredIngredientsArray = ingredientsArray.filter { $0.category == category }
-    }
-    
-    func selectIngredient(_ item: IngredientModel) {
-        if let index = filteredIngredientsArray.firstIndex(where: { $0.name == item.name }) {
-            filteredIngredientsArray[index].isSelected.toggle()
+ 
+    // No more stored filteredIngredientsArray
+        
+        init() {
+            // No initialization needed for filteredIngredientsArray
         }
+        
+        
+    var filteredIngredientsArray: [IngredientModel] {
+            print("Filtering for category: \(currentCategory)")
+            let filtered = ingredientsArray.filter { $0.category == currentCategory }
+            print("Filtered array: \(filtered)")
+            return filtered
+        }
+        
+        @Published var currentCategory: IngredientModel.Category = .greens // Add this
+
+    func selectIngredient(_ item: IngredientModel) {
+            if let index = ingredientsArray.firstIndex(where: { $0.name == item.name }) {
+                ingredientsArray[index].isSelected.toggle()
+                print("Ingredient '\(item.name)' selected. ingredientsArray: \(ingredientsArray)")
+            }
+        }
+
+    func addIngredient(name: String, category: IngredientModel.Category) {
+            let newIngredient = IngredientModel(name: name, category: category)
+            ingredientsArray.append(newIngredient)
+            currentCategory = category
+            print("Ingredient '\(name)' added to category '\(category)'. ingredientsArray: \(ingredientsArray)")
+        }
+        
     }
-    
-    func addIngredient(for category: IngredientModel.Category) {
-        // Replace "New Ingredient" with an appropriate default name if needed.
-        let newIngredient = IngredientModel(name: "New Ingredient", category: category)
-        filteredIngredientsArray.append(newIngredient)
-    }
-    
-    func resetFilteredIngredients() {
-        filteredIngredientsArray = ingredientsArray
-    }
-}

@@ -12,29 +12,12 @@ struct CreateIngredientFormView: View {
     @EnvironmentObject var vm : IngredientViewModel
     var category : IngredientModel.Category
     @State var textFieldName = ""
-    
+    @Environment(\.presentationMode) var presentationMode // Add this
+
     var body: some View {
         ZStack{
-            switch category {
-            case .greens:
-                Color.greensColor.edgesIgnoringSafeArea(.all)
-            case .veggies:
-                Color.veggiesColor.edgesIgnoringSafeArea(.all)
-            case .protein:
-                Color.proteinColor.edgesIgnoringSafeArea(.all)
-            case .fats:
-                Color.fatsColor.edgesIgnoringSafeArea(.all)
-            case .oil:
-                Color.oilColor.edgesIgnoringSafeArea(.all)
-            case .seedsAndNuts:
-                Color.seedsColor.edgesIgnoringSafeArea(.all)
-            case .fruits:
-                Color.fruitsColor.edgesIgnoringSafeArea(.all)
-            case .seasoning:
-                Color.seasoningColor.edgesIgnoringSafeArea(.all)
-            case .acid:
-                Color.acidColor.edgesIgnoringSafeArea(.all)
-            }
+            category.color.edgesIgnoringSafeArea(.all) // Use category.color
+
             VStack {
                 Text("Create ingredient")
                     .font(.title.bold())
@@ -46,9 +29,9 @@ struct CreateIngredientFormView: View {
                     .cornerRadius(20)
                     .padding(.horizontal)
                 Button {
-                    vm.addIngredient(category: category)
+                    vm.addIngredient(name: textFieldName, category: category) // Pass the name
+                    presentationMode.wrappedValue.dismiss() // Dismiss the view
                     
-                    //
                 } label: {
                     Text("Create")
                         .font(.title3)
@@ -56,15 +39,13 @@ struct CreateIngredientFormView: View {
                         .foregroundColor(Color(uiColor: .systemBackground))
                         .padding()
                         .frame(maxWidth: .infinity)
-                        .background(.green) //change as category
+                        .background(category.color) // Use category.color
                         .cornerRadius(20)
                         .padding(.horizontal)
                 }
 
             }
         }
-        
-        
     }
 }
 

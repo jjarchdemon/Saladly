@@ -52,12 +52,12 @@ struct HeaderView: View {
                     .foregroundColor(.white)
                     .bold()
                     .padding()
-                    .background(Color.brightGreen)
+                    .background(Color.green)
                     .cornerRadius(20)
                     .padding(.bottom)
             }
         }
-        .accentColor(.brightGreen)
+        .accentColor(.green)
     }
 }
 
@@ -78,8 +78,8 @@ struct CategorySectionView: View {
                         CreateButtonView(category: category)
                     }
 
-                    ForEach(vm.ingredientsArray.filter { $0.category == category }, id: \.self) { item in
-                        IngredientView(vm: vm, item: item)
+                    ForEach(vm.filteredIngredientsArray.filter { $0.category == category }, id: \.name) { item in // Use filtered array
+                        IngredientView(item: item)
                             .onTapGesture {
                                 vm.selectIngredient(item)
                             }
